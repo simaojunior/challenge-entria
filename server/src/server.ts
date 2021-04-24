@@ -1,14 +1,33 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-
-const router = new Router();
+import graphqlHTTP from 'koa-graphql';
+import { buildSchema } from 'graphql';
 
 const app = new Koa();
+const router = new Router();
 
-router.get('/', async (ctx: any) => {
-  ctx.body = 'hello world!';
-});
+const schema = buildSchema(`
+	type Query {
+		hello: String
+	}
+
+`);
+
+const root = {
+	hello: () => 'Hello world!',
+};
+
+router.all(
+	'/graphql',
+	graphqlHTTP({
+		schema,
+		graphiql: true,
+		rootValue: root,
+	}),
+);
+
+app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(3333, () => {
-  console.log('Server running.');
+	console.log('Server running.');
 });
