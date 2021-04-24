@@ -14,7 +14,7 @@ const schema = buildSchema(`
 `);
 
 const root = {
-	hello: () => 'Hello world!',
+	hello: () => 'Hello challenge!',
 };
 
 router.all(
