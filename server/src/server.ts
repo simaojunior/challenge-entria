@@ -9,12 +9,14 @@ const router = new Router();
 const schema = buildSchema(`
 	type Query {
 		hello: String
-	}
+		name: String
+	},
 
 `);
 
 const root = {
 	hello: () => 'Hello challenge!',
+	name: () => 'Naruto',
 };
 
 router.all(
@@ -29,5 +31,5 @@ router.all(
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(3333, () => {
-	console.log('Server running.');
+	console.log('Server running on port 3333');
 });
