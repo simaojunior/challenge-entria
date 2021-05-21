@@ -17,6 +17,8 @@ const root = {
 	hello: () => 'Hello challenge!',
 };
 
+app.on('error', error => console.log('Server error', error));
+
 router.all(
 	'/graphql',
 	graphqlHTTP({
@@ -28,6 +30,4 @@ router.all(
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3333, () => {
-	console.log('Server running.');
-});
+export default app;
