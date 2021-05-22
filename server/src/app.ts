@@ -20,9 +20,6 @@ const schema = buildSchema(`
 	}
 
 `);
-const root = {
-	hello: () => 'Hello challenge!',
-};
 
 router.get('/', ctx => {
 	const info = ['/graphql -- GraphiQL', '/playground -- GraphQL Playground'];
